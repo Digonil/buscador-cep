@@ -13,6 +13,7 @@ import java.net.http.HttpResponse;
 public class ConsultaCEP {
 
     private String Cep;
+
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public CepDTO criarConsulta(String cep) throws IOException, InterruptedException {
@@ -27,18 +28,10 @@ public class ConsultaCEP {
                 .send(request, HttpResponse.BodyHandlers.ofString());
         String json = response.body();
 
-        CepDTO pesquisaCep = gson.fromJson(json, CepDTO.class);
+        CepDTO meuCep = gson.fromJson(json, CepDTO.class);
 
-        return pesquisaCep;
-    }
 
-    public FileWriter criarArquivo(CepDTO pesquisaCep) throws IOException {
-
-        FileWriter escrita = new FileWriter("cep.json");
-        escrita.write(gson.toJson(pesquisaCep));
-        escrita.close();
-
-        return escrita;
+        return meuCep;
     }
 
 

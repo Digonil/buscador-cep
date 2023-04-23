@@ -8,14 +8,16 @@ public class Program {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         Locale.setDefault(Locale.US);
-
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Digite o numero do cep a ser pesquisado: ");
+        System.out.println("Digite o numero do CEP a ser pesquisado: ");
         String cep = scanner.nextLine();
 
         ConsultaCEP consulta = new ConsultaCEP();
+        GeradorDeArquivo gerador = new GeradorDeArquivo();
+        CepDTO endereco = consulta.criarConsulta(cep);
+        gerador.criarArquivo(endereco);
 
-        consulta.criarArquivo(consulta.criarConsulta(cep));
+        System.out.println(endereco);
 
     }
 }
